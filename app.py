@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, make_response, request
 import pandas as pd
 import joblib
+import threading
 
 from sentence_transformers import SentenceTransformer
 import numpy as np
@@ -98,5 +99,8 @@ def bestcv():
 
 
 # # Running the app
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+threading.Thread(target=app.run, kwargs={
+                 'host': '0.0.0.0', 'port': 5000}).start()
